@@ -1,6 +1,6 @@
 {
-  "name": "grunt-task-hooker",
-  "version": "0.1.9",
+  "name": "grunt-task-hook",
+  "version": "1.0.0",
   "description": "Add pre-execution and post-execution \"hooks\" to grunt task",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:kingback/grunt-task-hooker.git"
+    "url": "git@github.com:shiftj18/grunt-task-hook.git"
   },
   "keywords": [
     "grunt",
@@ -17,15 +17,18 @@
     "hook"
   ],
   "author": {
-    "name": "kingback",
-    "email": "ningzbruc@gmail.com"
+    "name": "shiftj18",
+    "email": "shiftj18@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kingback/grunt-task-hooker/issues"
+    "url": "https://github.com/shiftj18/grunt-task-hook/issues"
   },
-  "homepage": "https://github.com/kingback/grunt-task-hooker#readme",
+  "homepage": "https://github.com/shiftj18/grunt-task-hook#readme",
   "dependencies": {
     "exit": "^0.1.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }

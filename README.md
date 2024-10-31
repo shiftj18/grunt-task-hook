@@ -1,4 +1,6 @@
-# grunt-task-hooker
+# grunt-task-hook
+
+> Forked from `grunt-task-hooker`. Support display `hookTask()` details and source in verbose mode.
 
 <p align="center">
   <a href="https://www.npmjs.com/package/grunt-task-hooker"><img alt="NPM Version" src="https://img.shields.io/npm/v/grunt-task-hooker.svg?style=flat"/></a>

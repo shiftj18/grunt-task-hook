@@ -2,7 +2,9 @@
 
 let globalHooker;
 const exit = require('exit');
+const { name } = require('./package.json');
 const VALID_TASK_TYPE = ['string', 'array', 'function'];
+
 const hookFunction = function(grunt) {
   if (globalHooker) return globalHooker;
 
@@ -10,7 +12,6 @@ const hookFunction = function(grunt) {
   const runTask = grunt.task.run;
 
   const hooker = {
-
     _run(tasks) {
       if (!tasks || !tasks.length) return;
       return runTask.apply(grunt.task, arguments);
@@ -57,10 +58,29 @@ const hookFunction = function(grunt) {
 
       const whereType = grunt.util.kindOf(where);
 
-      if (!whereType) {
+      if (!where) {
         where = 'pre';
       } else if (whereType === 'boolean') {
         where = where ? 'post' : 'pre';
+      }
+
+      if (grunt.option('verbose')) {
+        const displayHookName = typeof task === 'function' ? '[Function]' : typeof task === 'string' ? task : JSON.stringify(task);
+        const displayTaskName = typeof taskName === 'string' ? taskName : JSON.stringify(taskName);
+        grunt.log.writeln(`\nHookTask:`, `${where} ${displayTaskName}`.cyan, `, with:`, `${displayHookName}`.cyan, `, desc:`, `${description}`.cyan);
+
+        // 通过 stack 属性获取堆栈信息，通常第一行是 Error，第二行是错误的来源，第三行是函数的调用来源
+        // 即 stack[1] 是调用者信息，格式通常为 "    at functionName (path/to/file.js:line:column)"
+        // 匹配括号内的内容，提取文件路径和行列信息
+        const err = new Error();
+        const stack = err.stack.split('\n');
+        const callerLine = stack[2] || "Unknown caller";
+        const regex = /\((.*?)\)/; 
+        const match = regex.exec(callerLine);
+        if (match) {
+          const [filePath, line, column] = match[1].split(":");
+          grunt.log.writeln(`Source:`, `${filePath}:${line}:${column}`.gray);
+        }
       }
 
       if (taskNameType === 'array') {
@@ -124,14 +144,14 @@ const hookFunction = function(grunt) {
 
 Object.defineProperty(hookFunction, 'hook', {
   get: function() {
-    console.error('Error: Use hooker like "require(\'grunt-task-hooker\')(grunt)"'.red);
+    console.error(`Error: Use hooker like "require(\'${name}\')(grunt)"`.red);
     exit(0);
   }
 });
 
 Object.defineProperty(hookFunction, 'unhook', {
   get: function() {
-    console.error('Error: Use hooker like "require(\'grunt-task-hooker\')(grunt)"'.red);
+    console.error(`Error: Use hooker like "require(\'${name}\')(grunt)"`.red);
     exit(0);
   }
 });
