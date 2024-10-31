@@ -3,7 +3,7 @@
 > Forked from `grunt-task-hooker`. Support display `hookTask()` details and source in verbose mode.
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/grunt-task-hooker"><img alt="NPM Version" src="https://img.shields.io/npm/v/grunt-task-hooker.svg?style=flat"/></a>
+  <a href="https://www.npmjs.com/package/grunt-task-hook"><img alt="NPM Version" src="https://img.shields.io/npm/v/grunt-task-hook.svg?style=flat"/></a>
 </p>
 
 Add pre-execution and post-execution "hooks" to grunt task, see [issues/542](https://github.com/gruntjs/grunt/issues/542).
@@ -11,7 +11,7 @@ Add pre-execution and post-execution "hooks" to grunt task, see [issues/542](htt
 ## Install
 
 ```
-npm install grunt-task-hooker --save-dev
+npm install grunt-task-hook --save-dev
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ npm install grunt-task-hooker --save-dev
 module.exports = function (grunt) {
 
   // Don't forget to pass "grunt" object into the function!!!
-  require('grunt-task-hooker')(grunt);
+  require('grunt-task-hook')(grunt);
 
   grunt.initConfig({
     clean: {
