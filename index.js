@@ -26,6 +26,10 @@ const hookFunction = function(grunt) {
       
       hookTaskList.push(hookTaskName);
       grunt.registerTask(hookTaskName, description, task);
+
+      if (grunt.option('verbose')) {
+        grunt.log.ok('hookTaskName:', `${hookTaskName}`.cyan);
+      }
     },
 
     _unhook(taskName, where) {
@@ -67,7 +71,7 @@ const hookFunction = function(grunt) {
       if (grunt.option('verbose')) {
         const displayHookName = typeof task === 'function' ? '[Function]' : typeof task === 'string' ? task : JSON.stringify(task);
         const displayTaskName = typeof taskName === 'string' ? taskName : JSON.stringify(taskName);
-        grunt.log.writeln(`\nHookTask:`, `${where} ${displayTaskName}`.cyan, `, with:`, `${displayHookName}`.cyan, `, desc:`, `${description}`.cyan);
+        grunt.log.writeln('\nHookTask:', `${where}`.cyan, 'task:', `${displayTaskName}`.cyan, 'with:', `${displayHookName}`.cyan, 'desc:', `${description}`.cyan);
 
         // 通过 stack 属性获取堆栈信息，通常第一行是 Error，第二行是错误的来源，第三行是函数的调用来源
         // 即 stack[1] 是调用者信息，格式通常为 "    at functionName (path/to/file.js:line:column)"
